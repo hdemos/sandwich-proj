@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 public class JsonUtils {
 
-    public static Sandwich parseSandwichJson(String json) throws JSONException{
+    public String parseSandwichJson(String json) throws JSONException{
         //return null;
 
         //Sandwich.setMainName();
@@ -32,7 +32,7 @@ public class JsonUtils {
         getIngredients();
         String ingredients = details.getString("ingredients");
 
-        return details.getJSONObject("name");
+        return mainName;
 
 
     }

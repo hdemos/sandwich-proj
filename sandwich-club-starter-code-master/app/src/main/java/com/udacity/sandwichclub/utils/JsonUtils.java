@@ -7,12 +7,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+
 public class JsonUtils {
 
-    public String parseSandwichJson(String json) throws JSONException{
-        //return null;
+    public static Sandwich getSandwichDetails(String json) throws JSONException{
+        //can't instanciate list b/c its an interface (arraylist best bet)
+        //convery JSPONArrays to collection type
+        //instanciate w/ constructors
 
-        //Sandwich.setMainName();
+        //String[] parsedSandwichDetails = null;
+
+
 
         //Initialize JSONObject from JSON string
         JSONObject details = new JSONObject(json);
@@ -20,28 +27,51 @@ public class JsonUtils {
 
         //Name into JSONObject
         JSONObject name = details.getJSONObject("name");
-        //split into data
-
+        //split into mainName and alsoKnownAs array
         String mainName = name.getString("mainName");
 
-        JSONArray alsoKnownAs;
-        alsoKnownAs = name.getJSONArray("AlsoKnownAs");
 
+        JSONArray alsoKnownAs = name.getJSONArray("AlsoKnownAs");
+        //change into different container
+        ArrayList<String> alsoKnownAsList = new ArrayList<String>(alsoKnownAs.length());
+
+
+        for(int i=1; i<alsoKnownAs.length(); i++)
+        {
+
+            //get string from alsoknownas
+            alsoKnownAsList.add(alsoKnownAs.getString(i-1));
+            //add to alsoknownas1
+        }
+
+
+        String origin = details.getString("placeOfOrigin");
         String description = details.getString("description");
         String image = details.getString("image");
-        getIngredients();
-        String ingredients = details.getString("ingredients");
+        JSONArray ingredients = details.getJSONArray("ingredients");
+        //change into different container
+        ArrayList<String> ingredientsList = new ArrayList<String>(alsoKnownAs.length());
 
-        return mainName;
+
+        for(int i=1; i<alsoKnownAs.length(); i++)
+        {
+
+            //get string from alsoknownas
+            ingredientsList.add(ingredients.getString(i-1));
+            //add to alsoknownas1
+        }
+
+        //populate into sandwich
+        Sandwich sandwich = new Sandwich(mainName, alsoKnownAsList, origin, description, image, ingredientsList);
+
+        //Sandwich sandwich1 = new Sandwich();
+        sandwich.setImage(image);
+
+
+        return sandwich;
 
 
     }
 
-    protected static String[] getIngredients() {
 
-
-        String[] abc = null;
-
-        return abc;
-    }
 }

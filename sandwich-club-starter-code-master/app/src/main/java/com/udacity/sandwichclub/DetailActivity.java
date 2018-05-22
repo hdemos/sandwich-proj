@@ -3,7 +3,10 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -24,6 +27,8 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
+        TextView origin = findViewById(R.id.origin_tv);
+        //ListView ingredientsLv = (ListView) findViewById(R.id.ingredients_lv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -39,9 +44,13 @@ public class DetailActivity extends AppCompatActivity {
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
+        Sandwich sandwich = null;
         //Sandwich[] sandwich = null;
         try {
-            Sandwich sandwich = JsonUtils.getSandwichDetails(json);
+            sandwich = JsonUtils.getSandwichDetails(json);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
 
             if (sandwich == null) {
                 // Sandwich data unavailable
@@ -50,16 +59,24 @@ public class DetailActivity extends AppCompatActivity {
             }
 
 
-            populateUI();
+            populateUI(sandwich);
             Picasso.with(this)
                     .load(sandwich.getImage())
+                    //.load("https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG")
                     .into(ingredientsIv);
 
             setTitle(sandwich.getMainName());
-        }
-        catch(JSONException e){
-            e.printStackTrace();
-        }
+
+//            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
+//                    (this, android.R.layout.simple_list_item_1, sandwich.getIngredients());
+//            ingredientsLv.setAdapter(arrayAdapter);
+
+
+
+
+
+
+
 
     }
 
@@ -68,7 +85,9 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
+    private void populateUI(Sandwich sandwich) {
 
+//        String[] fromColumns = {ContactsContract.Data.DISPLAY_NAME};
+//        int[] toViews = {android.R.id.text1};
     }
 }

@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -34,8 +35,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
-        //TextView origin = findViewById(R.id.origin_tv);
-        ListView ingredientsLv = (ListView) findViewById(R.id.ingredients_lv);
+
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -82,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
         for (int i = 0; i < alsoKnown.size(); i++) {
 
 
-            alsoKnownStr = alsoKnownStr + alsoKnown.get(i);
+            alsoKnownStr = alsoKnownStr + "<b> '" + alsoKnown.get(i) +"'</b>";
             if( alsoKnown.size() > 1 & (i+1 < alsoKnown.size()))
             {
                 alsoKnownStr= alsoKnownStr + " OR ";
@@ -93,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
         Log.d("alsoKnownAsStr: ", "also Known as: " + alsoKnownStr);
         //populate ingredients to tv
         final TextView alsoKnownTV = (TextView) findViewById(R.id.also_known_tv);
-        alsoKnownTV.setText(alsoKnownStr);
+        alsoKnownTV.setText(Html.fromHtml(alsoKnownStr));
 
 
         final TextView originTextView = (TextView) findViewById(R.id.origin_tv);

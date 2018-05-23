@@ -48,25 +48,29 @@ public class JsonUtils {
                 alsoKnownAsList.add(alsoKnownAs.getString(i - 1));
                 //add to alsoknownas1
             }
+            s.setAlsoKnownAs(alsoKnownAsList);
+
 
             String origin = details.getString("placeOfOrigin");
             String description = details.getString("description");
             String image = details.getString("image");
             JSONArray ingredients = details.getJSONArray("ingredients");
             //change into different container
-            ArrayList<String> ingredientsList = new ArrayList<String>(alsoKnownAs.length());
+            Log.d("INGR", "Ingredients are pulled:" + ingredients);
+            ArrayList<String> ingredientsList = new ArrayList<String>(ingredients.length());
 
 
-            for (int i = 1; i < alsoKnownAs.length(); i++) {
+            for (int i = 0; i < ingredients.length(); i++) {
 
                 //get string from alsoknownas
-                ingredientsList.add(ingredients.getString(i - 1));
+                ingredientsList.add(ingredients.get(i).toString());
                 //add to alsoknownas1
             }
+            Log.d("INGR", "Ingredients are converted:" + ingredientsList);
 
             //populate into sandwich
             Sandwich sandwich = new Sandwich(mainName, alsoKnownAsList, origin, description, image, ingredientsList);
-            sandwich.setImage("https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG");
+            //sandwich.setImage("https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG");
 
             //Sandwich sandwich1 = new Sandwich();
             //sandwich.setImage(image);

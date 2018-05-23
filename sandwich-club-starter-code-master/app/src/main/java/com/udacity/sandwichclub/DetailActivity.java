@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
         TextView origin = findViewById(R.id.origin_tv);
-        //ListView ingredientsLv = (ListView) findViewById(R.id.ingredients_lv);
+        ListView ingredientsLv = (ListView) findViewById(R.id.ingredients_lv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -66,6 +66,10 @@ public class DetailActivity extends AppCompatActivity {
                     .into(ingredientsIv);
 
             setTitle(sandwich.getMainName());
+
+            final TextView originTextView = (TextView) findViewById(R.id.origin_tv);
+            originTextView.setText(sandwich.getPlaceOfOrigin());
+
 
 //            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
 //                    (this, android.R.layout.simple_list_item_1, sandwich.getIngredients());

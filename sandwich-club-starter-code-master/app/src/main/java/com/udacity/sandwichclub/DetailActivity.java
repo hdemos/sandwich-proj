@@ -82,10 +82,10 @@ public class DetailActivity extends AppCompatActivity {
         for (int i = 0; i < alsoKnown.size(); i++) {
 
 
-            alsoKnownStr = alsoKnownStr + "<b> '" + alsoKnown.get(i) +"'</b>";
+            alsoKnownStr = alsoKnownStr + "'" + alsoKnown.get(i) +"'";
             if( alsoKnown.size() > 1 & (i+1 < alsoKnown.size()))
             {
-                alsoKnownStr= alsoKnownStr + " OR ";
+                alsoKnownStr= alsoKnownStr + "<b> or </b>";
             }
 
         }
@@ -97,7 +97,24 @@ public class DetailActivity extends AppCompatActivity {
 
 
         final TextView originTextView = (TextView) findViewById(R.id.origin_tv);
-        originTextView.setText(sandwich.getPlaceOfOrigin());
+
+
+        String originAlt = "None"
+;        Log.d("checkOrigin", "originLen:"+ sandwich.getPlaceOfOrigin() +"|");
+        String originStr = sandwich.getPlaceOfOrigin();
+        if(sandwich.getMainName()=="Ham and cheese sandwich") {
+
+            //alsoKnownTV.setVisibility(1);
+            alsoKnownTV.append(" N/A ");
+
+            originTextView.setText(originAlt);
+
+        }
+        else {
+            originTextView.setText(sandwich.getPlaceOfOrigin());
+        }
+
+
 
         //convert to string
         String ingredientsStr = "";
@@ -105,10 +122,10 @@ public class DetailActivity extends AppCompatActivity {
         for (int i = 0; i < sandwich.getIngredients().size(); i++) {
 
 
-            ingredientsStr = ingredientsStr + sand.get(i);
+            ingredientsStr = ingredientsStr + (i+1) + ". " + sand.get(i);
             if( sandwich.getIngredients().size() > 1 & (i+1 < sandwich.getIngredients().size()))
             {
-                ingredientsStr= ingredientsStr + ", \n";
+                ingredientsStr= ingredientsStr + " \n";
             }
 
         }
@@ -117,6 +134,8 @@ public class DetailActivity extends AppCompatActivity {
         final TextView ingredientsTV = (TextView) findViewById(R.id.ingredients_tv);
         ingredientsTV.setText(ingredientsStr);
 
+        final TextView descriptTv = (TextView) findViewById(R.id.description_tv);
+        descriptTv.setText(sandwich.getDescription());
 
 
 

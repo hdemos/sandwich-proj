@@ -32,7 +32,8 @@ public class JsonUtils {
             //split into mainName and alsoKnownAs array
             String mainName = name.getString("mainName");
             //check data
-            s.setMainName(mainName);
+            //s.setMainName(mainName);
+
             if(mainName != null) {
                 Log.d("NAME", "MainName is set:" + mainName);
             }
@@ -48,12 +49,19 @@ public class JsonUtils {
                 //add to alsoknownas1
             }
             Log.d("ALSO", "AlsoKnown are converted:" + alsoKnownAsList);
-            s.setAlsoKnownAs(alsoKnownAsList);
+            //s.setAlsoKnownAs(alsoKnownAsList);
 
 
             String origin = details.getString("placeOfOrigin");
+            Log.d("Origin", "origin saved as:" + origin);
+            //s.setPlaceOfOrigin(origin);
+
             String description = details.getString("description");
+            //s.setDescription(description);
+
             String image = details.getString("image");
+            //s.setImage(image);
+
             JSONArray ingredients = details.getJSONArray("ingredients");
             //verify the jsonarray is filled correctly
             Log.d("INGR", "Ingredients are pulled:" + ingredients);
@@ -66,7 +74,8 @@ public class JsonUtils {
                 //add to alsoknownas1
             }
             Log.d("INGR", "Ingredients are converted:" + ingredientsList);
-            s.setIngredients(ingredientsList);
+            //s.setIngredients(ingredientsList);
+
             //populate into sandwich
             Sandwich sandwich = new Sandwich(mainName, alsoKnownAsList, origin, description, image, ingredientsList);
             //sandwich.setImage("https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG");
@@ -75,7 +84,7 @@ public class JsonUtils {
             //sandwich.setImage(image);
 
 
-            return s;
+            return sandwich;
 
 
         } catch (JSONException e) {

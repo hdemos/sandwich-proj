@@ -27,6 +27,7 @@
                     android:padding="10px" />
 
                 <TextView
+                    android:id="@+id/also_known_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/detail_also_known_as_label"
@@ -41,6 +42,7 @@
                     android:padding="10px" />
 
                 <TextView
+                    android:id="@+id/origin_tv_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/detail_place_of_origin_label"
@@ -82,7 +84,7 @@
                     android:textSize="16dp"
                     android:padding="10px" />
 
-                
+
 
             </LinearLayout>
 

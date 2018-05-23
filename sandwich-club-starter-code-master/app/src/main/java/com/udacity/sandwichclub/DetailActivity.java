@@ -1,5 +1,4 @@
 package com.udacity.sandwichclub;
-import android.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,17 +13,18 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 import org.json.JSONException;
 import java.util.List;
 
+
 //submission1
 public class DetailActivity extends AppCompatActivity {
 
-    
+
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(android.R.layout.activity_detail);
+        setContentView(R.layout.activity_detail);
 
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
@@ -59,7 +59,7 @@ public class DetailActivity extends AppCompatActivity {
             }
 
 
-        populateUI(sandwich);
+        //populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
                 //.load("https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG")
@@ -133,13 +133,12 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-
+//          Attempt to use listview for list of ingredients
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
 //                    (this, android.R.layout.simple_list_item_1, sandwich.getIngredients());
 //        ingredientsLv.setAdapter(arrayAdapter);
         //ListView won't show all items so workaround to change dynamically
 
-        //view = mLayoutInflater.inflate(R.layout.activity_detail, null);
 
 //        LayoutParams lp = (LayoutParams) ingredientsLv.getLayoutParams();
 //        Log.d("ingredientsLV", "Ingredients LV size: " + sandwich.getIngredients().size());
@@ -153,12 +152,6 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
     }
 
     private void closeOnError() {
@@ -166,9 +159,8 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI(Sandwich sandwich) {
+    private void populateUI() {
 
-//        String[] fromColumns = {ContactsContract.Data.DISPLAY_NAME};
-//        int[] toViews = {android.R.id.text1};
+
     }
 }

@@ -85,7 +85,7 @@ public class DetailActivity extends AppCompatActivity {
             alsoKnownStr = alsoKnownStr + alsoKnown.get(i);
             if( alsoKnown.size() > 1 & (i+1 < alsoKnown.size()))
             {
-                alsoKnownStr= alsoKnownStr + ", ";
+                alsoKnownStr= alsoKnownStr + " OR ";
             }
 
         }
@@ -108,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
             ingredientsStr = ingredientsStr + sand.get(i);
             if( sandwich.getIngredients().size() > 1 & (i+1 < sandwich.getIngredients().size()))
             {
-                ingredientsStr= ingredientsStr + ", ";
+                ingredientsStr= ingredientsStr + ", \n";
             }
 
         }

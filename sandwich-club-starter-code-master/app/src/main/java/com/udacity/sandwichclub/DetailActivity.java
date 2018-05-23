@@ -3,6 +3,9 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -14,6 +17,10 @@ import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
 import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 
 public class DetailActivity extends AppCompatActivity {
@@ -27,7 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
-        TextView origin = findViewById(R.id.origin_tv);
+        //TextView origin = findViewById(R.id.origin_tv);
         ListView ingredientsLv = (ListView) findViewById(R.id.ingredients_lv);
 
         Intent intent = getIntent();
@@ -59,21 +66,79 @@ public class DetailActivity extends AppCompatActivity {
             }
 
 
-            populateUI(sandwich);
-            Picasso.with(this)
-                    .load(sandwich.getImage())
-                    //.load("https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG")
-                    .into(ingredientsIv);
+        populateUI(sandwich);
+        Picasso.with(this)
+                .load(sandwich.getImage())
+                //.load("https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG")
+                .into(ingredientsIv);
 
-            setTitle(sandwich.getMainName());
+        setTitle(sandwich.getMainName());
 
-            final TextView originTextView = (TextView) findViewById(R.id.origin_tv);
-            originTextView.setText(sandwich.getPlaceOfOrigin());
+        //alsoKnownAs
+
+        //convert list to string of items
+        String alsoKnownStr = "";
+        List<String> alsoKnown = sandwich.getAlsoKnownAs();
+        for (int i = 0; i < alsoKnown.size(); i++) {
 
 
-//            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
+            alsoKnownStr = alsoKnownStr + alsoKnown.get(i);
+            if( alsoKnown.size() > 1 & (i+1 < alsoKnown.size()))
+            {
+                alsoKnownStr= alsoKnownStr + ", ";
+            }
+
+        }
+
+        Log.d("alsoKnownAsStr: ", "also Known as: " + alsoKnownStr);
+        //populate ingredients to tv
+        final TextView alsoKnownTV = (TextView) findViewById(R.id.also_known_tv);
+        alsoKnownTV.setText(alsoKnownStr);
+
+
+        final TextView originTextView = (TextView) findViewById(R.id.origin_tv);
+        originTextView.setText(sandwich.getPlaceOfOrigin());
+
+        //convert to string
+        String ingredientsStr = "";
+        List<String> sand = sandwich.getIngredients();
+        for (int i = 0; i < sandwich.getIngredients().size(); i++) {
+
+
+            ingredientsStr = ingredientsStr + sand.get(i);
+            if( sandwich.getIngredients().size() > 1 & (i+1 < sandwich.getIngredients().size()))
+            {
+                ingredientsStr= ingredientsStr + ", ";
+            }
+
+        }
+        Log.d("ingredientStr", "ing string: " + ingredientsStr);
+        //populate ingredients to tv
+        final TextView ingredientsTV = (TextView) findViewById(R.id.ingredients_tv);
+        ingredientsTV.setText(ingredientsStr);
+
+
+
+
+
+
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
 //                    (this, android.R.layout.simple_list_item_1, sandwich.getIngredients());
-//            ingredientsLv.setAdapter(arrayAdapter);
+//        ingredientsLv.setAdapter(arrayAdapter);
+        //ListView won't show all items so workaround to change dynamically
+
+        //view = mLayoutInflater.inflate(R.layout.activity_detail, null);
+
+//        LayoutParams lp = (LayoutParams) ingredientsLv.getLayoutParams();
+//        Log.d("ingredientsLV", "Ingredients LV size: " + sandwich.getIngredients().size());
+//        lp.height =  sandwich.getIngredients().size();
+//        ingredientsLv.setLayoutParams(lp);
+//        arrayAdapter.notifyDataSetChanged();
+
+//        ViewGroup.LayoutParams param = ListView.getLayoutParams();
+//        param.height = arrayAdapter.getCount()*30;
+//       ListView.setLayoutParams(param);
+
 
 
 
